@@ -1,0 +1,2316 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MRSM Gemencheh QRA</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+body {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #FFF5F7 0%, #FFE8EC 25%, #FFF0F5 50%, #FFE4E9 75%, #FFF5F8 100%);
+  color: #2D1B2E;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 192, 203, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 218, 224, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.main-wrapper {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid rgba(255, 182, 193, 0.3);
+  box-shadow: 0 8px 32px rgba(255, 105, 135, 0.12);
+}
+
+.logo {
+  color: #D4508A;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.03em;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo::before {
+  content: '🌸';
+  font-size: 2rem;
+  animation: rotateFlower 4s ease-in-out infinite;
+}
+
+@keyframes rotateFlower {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+.menu {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+
+.menu button {
+  background: transparent;
+  border: 2px solid transparent;
+  color: #8B4B7A;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 182, 193, 0.2);
+  transition: all 0.5s ease;
+  transform: translate(-50%, -50%);
+}
+
+.menu button:hover::before {
+  width: 200%;
+  height: 200%;
+}
+
+.menu button:hover {
+  border-color: rgba(255, 182, 193, 0.5);
+  color: #D4508A;
+  transform: translateY(-2px);
+}
+
+.menu button.active {
+  background: linear-gradient(135deg, #FF6FA0 0%, #D4508A 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(212, 80, 138, 0.35);
+}
+
+/* CONTENT WRAPPER */
+.content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* PAGE TRANSITION */
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* HOME HERO */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: transparent;
+  border-bottom: none;
+  position: relative;
+}
+
+.hero::before {
+  content: '🌺';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  font-size: 4rem;
+  opacity: 0.2;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '🌷';
+  position: absolute;
+  bottom: 15%;
+  right: 10%;
+  font-size: 3.5rem;
+  opacity: 0.2;
+  animation: float 7s ease-in-out infinite 1s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-logos {
+  display: flex;
+  gap: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mrsm-logo, .community-pic {
+  width: 200px;
+  height: 200px;
+  border: none;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 40px rgba(255, 105, 135, 0.18);
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.4s ease;
+  border: 3px solid rgba(255, 182, 193, 0.3);
+}
+
+.mrsm-logo::before, .community-pic::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);
+  border-radius: 50%;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.mrsm-logo:hover, .community-pic:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 50px rgba(255, 105, 135, 0.28);
+}
+
+.hero h1 {
+  font-size: 3.25rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  color: #D4508A;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;
+}
+
+.hero h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #FFB6C1, transparent);
+}
+
+.hero p {
+  font-size: 1.35rem;
+  color: #8B4B7A;
+  max-width: 650px;
+  margin: 0 auto;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+/* CONTENT SECTIONS */
+.content-section {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(30px);
+  margin: 3rem;
+  padding: 4.5rem 3.5rem;
+  border-radius: 3rem;
+  border: 2px solid rgba(255, 182, 193, 0.25);
+  box-shadow: 0 15px 50px rgba(255, 105, 135, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.content-section::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.content-section::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(255, 192, 203, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+h2 {
+  text-align: center;
+  color: #D4508A;
+  font-size: 2.75rem;
+  margin-bottom: 3rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+h2::before {
+  content: '✿';
+  position: absolute;
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FFB6C1;
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+h2::after {
+  content: '✿';
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #FFB6C1;
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+.section-text {
+  text-align: center;
+  font-size: 1.15rem;
+  line-height: 1.9;
+  max-width: 850px;
+  margin: 0 auto;
+  color: #6B3D5E;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
+/* ACTIVITIES GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8FA 100%);
+  padding: 3rem;
+  border-radius: 2rem;
+  text-align: center;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 30px rgba(255, 105, 135, 0.12);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(255, 192, 203, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(255, 105, 135, 0.25);
+  border-color: #FFB6C1;
+}
+
+.card h3 {
+  color: #D4508A;
+  font-size: 1.65rem;
+  margin-bottom: 1.25rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+}
+
+.card p {
+  color: #6B3D5E;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+.card-date {
+  color: #B87BA0;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid rgba(255, 182, 193, 0.25);
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+/* DONATIONS SECTION */
+.donations-header {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.year-tab {
+  background: transparent;
+  border: 2px solid #FFB6C1;
+  color: #D4508A;
+  padding: 0.875rem 2.25rem;
+  border-radius: 2.5rem;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.year-tab::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: linear-gradient(135deg, #FF6FA0 0%, #D4508A 100%);
+  border-radius: 50%;
+  transition: all 0.5s ease;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.year-tab:hover::before {
+  width: 300%;
+  height: 300%;
+}
+
+.year-tab:hover {
+  color: #FFFFFF;
+  border-color: #D4508A;
+}
+
+.year-tab.active {
+  background: linear-gradient(135deg, #FF6FA0 0%, #D4508A 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 6px 25px rgba(212, 80, 138, 0.4);
+}
+
+.donation-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8FA 100%);
+  padding: 2.5rem;
+  border-radius: 2rem;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  box-shadow: 0 8px 30px rgba(255, 105, 135, 0.12);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 105, 135, 0.2);
+}
+
+.stat-value {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #D4508A;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 0.75rem;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #8B4B7A;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.chart-container {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8FA 100%);
+  padding: 3rem;
+  border-radius: 2rem;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  box-shadow: 0 10px 35px rgba(255, 105, 135, 0.15);
+  margin-bottom: 2.5rem;
+}
+
+.chart-title {
+  font-size: 1.65rem;
+  color: #D4508A;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 300px;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.bar {
+  width: 100%;
+  background: linear-gradient(180deg, #FF6FA0 0%, #FFB6C1 100%);
+  border-radius: 1rem 1rem 0 0;
+  transition: all 0.4s ease;
+  position: relative;
+  box-shadow: 0 6px 20px rgba(255, 105, 135, 0.25);
+}
+
+.bar:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(255, 105, 135, 0.35);
+  background: linear-gradient(180deg, #D4508A 0%, #FF6FA0 100%);
+}
+
+.bar-value {
+  position: absolute;
+  top: -2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  color: #D4508A;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.bar-label {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: #8B4B7A;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+.contributors-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.contributor-item {
+  background: linear-gradient(135deg, #FFF5F8 0%, #FFE8EC 100%);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border: 2px solid rgba(255, 182, 193, 0.25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.contributor-item:hover {
+  border-color: #FFB6C1;
+  transform: translateX(5px);
+  box-shadow: 0 6px 20px rgba(255, 105, 135, 0.15);
+}
+
+.contributor-name {
+  font-weight: 600;
+  color: #6B3D5E;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+}
+
+.contributor-amount {
+  font-weight: 700;
+  color: #D4508A;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
+}
+
+/* ANNOUNCEMENTS */
+.announcements-container {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.announcement-item {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8FA 100%);
+  padding: 2.5rem;
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  border-left: 5px solid #FF6FA0;
+  box-shadow: 0 8px 30px rgba(255, 105, 135, 0.12);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.announcement-item::before {
+  content: '🌸';
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 3rem;
+  opacity: 0.08;
+}
+
+.announcement-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 12px 40px rgba(255, 105, 135, 0.2);
+  border-left-width: 8px;
+}
+
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid rgba(255, 182, 193, 0.2);
+  padding-bottom: 1.25rem;
+}
+
+.announcement-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6B3D5E;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.4;
+}
+
+.announcement-date {
+  font-size: 0.95rem;
+  color: #B87BA0;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+
+.announcement-content {
+  color: #6B3D5E;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
+.priority-badge {
+  display: inline-block;
+  padding: 0.5rem 1.125rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.priority-high {
+  background: linear-gradient(135deg, #FF6FA0 0%, #FFB6C1 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(255, 105, 135, 0.35);
+}
+
+.priority-normal {
+  background: linear-gradient(135deg, #FFE8EC 0%, #FFF5F8 100%);
+  color: #D4508A;
+  border: 2px solid rgba(255, 182, 193, 0.4);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem;
+  color: #B87BA0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.4;
+}
+
+/* ADMIN PANEL */
+.admin-section {
+  max-width: 700px;
+  margin: 3rem auto 0;
+  padding-top: 3rem;
+  border-top: 2px solid rgba(255, 182, 193, 0.25);
+}
+
+.admin-toggle {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-toggle button {
+  background: linear-gradient(135deg, #FF6FA0 0%, #D4508A 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 2.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.05rem;
+  box-shadow: 0 6px 25px rgba(212, 80, 138, 0.35);
+}
+
+.admin-toggle button:hover {
+  background: linear-gradient(135deg, #D4508A 0%, #B83F76 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(212, 80, 138, 0.45);
+}
+
+.admin-panel {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8FA 100%);
+  padding: 3rem;
+  border-radius: 2rem;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  box-shadow: 0 10px 35px rgba(255, 105, 135, 0.15);
+}
+
+.admin-panel h3 {
+  color: #D4508A;
+  font-size: 1.75rem;
+  margin-bottom: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(255, 182, 193, 0.25);
+  padding-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.75rem;
+}
+
+.form-group label {
+  display: block;
+  color: #6B3D5E;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: #FFF5F8;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  border-radius: 1.25rem;
+  color: #6B3D5E;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #FF6FA0;
+  box-shadow: 0 0 0 4px rgba(255, 111, 160, 0.12);
+  background: #FFFFFF;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #FF6FA0 0%, #D4508A 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 1.125rem 2rem;
+  border-radius: 2.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-family: 'Quicksand', sans-serif;
+  box-shadow: 0 6px 25px rgba(212, 80, 138, 0.35);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #D4508A 0%, #B83F76 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(212, 80, 138, 0.45);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 0.625rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* CONTACT */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  max-width: 900px;
+  margin: 3rem auto 0;
+}
+
+.contact-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8FA 100%);
+  padding: 3rem;
+  border-radius: 2rem;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 35px rgba(255, 105, 135, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(255, 192, 203, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.contact-card:hover::before {
+  opacity: 1;
+}
+
+.contact-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(255, 105, 135, 0.25);
+  border-color: #FFB6C1;
+}
+
+.contact-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-card h3 {
+  color: #D4508A;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-card p {
+  color: #6B3D5E;
+  font-size: 1.05rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+/* FOOTER */
+footer {
+  padding: 2.5rem;
+  text-align: center;
+  color: #8B4B7A;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(30px);
+  border-top: 2px solid rgba(255, 182, 193, 0.25);
+  margin-top: auto;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  position: relative;
+}
+
+footer::before {
+  content: '🌸';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  opacity: 0.3;
+}
+
+/* TOAST NOTIFICATION */
+.toast {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  background: linear-gradient(135deg, #FF6FA0 0%, #D4508A 100%);
+  color: #FFFFFF;
+  padding: 1.25rem 2rem;
+  border-radius: 2.5rem;
+  box-shadow: 0 10px 40px rgba(212, 80, 138, 0.45);
+  font-weight: 600;
+  z-index: 1000;
+  animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(500px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .menu button {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .logo {
+    font-size: 1.35rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .mrsm-logo, .community-pic {
+    width: 150px;
+    height: 150px;
+  }
+
+  .content-section {
+    margin: 1.25rem;
+    padding: 2rem 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bar-chart {
+    height: 250px;
+    gap: 0.75rem;
+  }
+  
+  .bar-value {
+    font-size: 0.75rem;
+    top: -1.5rem;
+  }
+  
+  .bar-label {
+    font-size: 0.75rem;
+  }
+  
+  .modal-content {
+    margin: 1rem;
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(107, 61, 94, 0.85);
+  backdrop-filter: blur(15px);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8FA 100%);
+  padding: 3.5rem;
+  border-radius: 2.5rem;
+  border: 3px solid rgba(255, 182, 193, 0.4);
+  box-shadow: 0 25px 70px rgba(212, 80, 138, 0.35);
+  max-width: 700px;
+  width: 90%;
+  max-height: 85%;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(80px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: linear-gradient(135deg, #FF6FA0 0%, #D4508A 100%);
+  color: #FFFFFF;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 6px 20px rgba(212, 80, 138, 0.35);
+  font-family: 'Quicksand', sans-serif;
+}
+
+.modal-close:hover {
+  background: linear-gradient(135deg, #D4508A 0%, #B83F76 100%);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 8px 25px rgba(212, 80, 138, 0.45);
+}
+
+.event-detail h3 {
+  color: #D4508A;
+  font-size: 2.25rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  border-bottom: 3px solid rgba(255, 182, 193, 0.3);
+  padding-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.event-info {
+  margin-bottom: 2rem;
+}
+
+.event-info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #FFF5F8 0%, #FFE8EC 100%);
+  border-radius: 1.5rem;
+  border-left: 4px solid #FF6FA0;
+  border: 2px solid rgba(255, 182, 193, 0.25);
+  transition: all 0.3s ease;
+}
+
+.event-info-item:hover {
+  border-color: #FFB6C1;
+  transform: translateX(5px);
+  box-shadow: 0 6px 20px rgba(255, 105, 135, 0.15);
+}
+
+.event-icon {
+  font-size: 2rem;
+  margin-right: 1.25rem;
+  flex-shrink: 0;
+}
+
+.event-info-content h4 {
+  color: #D4508A;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.625rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.event-info-content p {
+  color: #6B3D5E;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
+.event-description {
+  color: #6B3D5E;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(255, 182, 193, 0.25);
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
+.event-activities {
+  margin-top: 2rem;
+}
+
+.event-activities h4 {
+  color: #D4508A;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+
+.event-activities ul {
+  list-style: none;
+  padding: 0;
+}
+
+.event-activities li {
+  padding: 0.875rem 0 0.875rem 2.5rem;
+  position: relative;
+  color: #6B3D5E;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
+.event-activities li:before {
+  content: '✿';
+  position: absolute;
+  left: 0;
+  color: #FF6FA0;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+</style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="main-wrapper"><!-- NAVBAR -->
+   <nav class="navbar">
+    <div class="logo" id="nav-logo">
+     MRSM Gemencheh QRA
+    </div>
+    <div class="menu"><button onclick="showPage('home')" class="active" data-page="home">Home</button> <button onclick="showPage('about')" data-page="about">About</button> <button onclick="showPage('activities')" data-page="activities">Activities</button> <button onclick="showPage('donations')" data-page="donations">Donations</button> <button onclick="showPage('announcements')" data-page="announcements">Announcements</button> <button onclick="showPage('feedback')" data-page="feedback">Feedback</button> <button onclick="showPage('contact')" data-page="contact">Contact</button>
+    </div>
+   </nav>
+   <div class="content-wrapper"><!-- HOME -->
+    <section id="home" class="page active hero">
+     <div class="hero-content">
+      <div class="hero-logos">
+       <div class="mrsm-logo">
+	  <img src ="mrsm1.jpg">
+        <svg width="180" height="180" viewbox="0 0 180 180"><rect x="20" y="20" width="140" height="140" fill="#8B5A2B" stroke="#6B4423" stroke-width="2" /> <text x="90" y="70" font-family="DM Serif Display" font-size="28" fill="#FFFEF2" text-anchor="middle">
+          MRSM
+         </text> <text x="90" y="110" font-family="Outfit" font-size="16" fill="#F5EBE0" text-anchor="middle">
+          GEMENCHEH
+         </text> <circle cx="90" cy="135" r="8" fill="#FFFEF2" />
+        </svg>
+       </div>
+       <div class="community-pic">
+        <svg width="180" height="180" viewbox="0 0 180 180"><rect x="10" y="10" width="160" height="160" fill="#F5EBE0" stroke="#8B5A2B" stroke-width="2" /> <circle cx="60" cy="70" r="20" fill="#A0826D" /> <circle cx="120" cy="70" r="20" fill="#A0826D" /> <rect x="40" y="100" width="100" height="50" fill="#8B5A2B" /> <rect x="20" y="30" width="140" height="5" fill="#D4A574" /> <text x="90" y="130" font-family="Outfit" font-size="18" fill="#FFFEF2" text-anchor="middle">
+          COMMUNITY
+         </text>
+        </svg>
+       </div>
+      </div>
+      <h1 id="hero-title">MRSM Gemencheh Quarters Residents Association</h1>
+      <p id="hero-tagline">Official community platform for residents</p>
+     </div>
+    </section><!-- ABOUT -->
+    <section id="about" class="page">
+     <div class="content-section">
+      <h2>About Us</h2>
+      <p class="section-text" id="about-text" style="margin-bottom: 3rem;">Established in 2007 to foster unity and provide a communication platform for MRSM Gemencheh quarters residents. Our association serves as a bridge between residents, promoting community welfare and organizing meaningful activities.</p>
+      <div style="margin-top: 3rem;">
+       <h2 style="margin-bottom: 2rem;">Quarters Details</h2>
+       <div class="grid">
+        <div class="card" style="cursor: default;">
+         <svg width="120" height="120" viewbox="0 0 120 120" style="margin-bottom: 1.5rem;"><rect x="10" y="30" width="100" height="70" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="2" /> <rect x="20" y="40" width="80" height="50" fill="#FFE8EC" stroke="#FF6FA0" stroke-width="2" /> <polygon points="60,10 10,35 110,35" fill="#D4508A" /> <rect x="45" y="60" width="30" height="40" fill="#FFB6C1" /> <circle cx="40" cy="55" r="8" fill="#FFF5F8" stroke="#FF6FA0" stroke-width="2" /> <circle cx="80" cy="55" r="8" fill="#FFF5F8" stroke="#FF6FA0" stroke-width="2" /> <path d="M 25 20 Q 30 10, 35 20" stroke="#FFB6C1" stroke-width="2" fill="none" /> <path d="M 85 20 Q 90 10, 95 20" stroke="#FFB6C1" stroke-width="2" fill="none" /> <circle cx="30" cy="23" r="3" fill="#FFC0CB" /> <circle cx="90" cy="23" r="3" fill="#FFC0CB" />
+         </svg>
+         <h3>Location</h3>
+         <p>MRSM Gemencheh Quarters<br>
+          Tampin Gemas<br>
+          Negeri Sembilan, Malaysia</p>
+        </div>
+        <div class="card" style="cursor: default;">
+         <svg width="120" height="120" viewbox="0 0 120 120" style="margin-bottom: 1.5rem;"><rect x="15" y="35" width="35" height="35" fill="#FFE8EC" stroke="#FFB6C1" stroke-width="2" /> <polygon points="32.5,20 15,35 50,35" fill="#D4508A" /> <rect x="25" y="50" width="15" height="20" fill="#FFB6C1" /> <rect x="70" y="35" width="35" height="35" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="2" /> <polygon points="87.5,20 70,35 105,35" fill="#FF6FA0" /> <rect x="80" y="50" width="15" height="20" fill="#FFB6C1" /> <rect x="15" y="75" width="35" height="35" fill="#FFF5F8" stroke="#FFB6C1" stroke-width="2" /> <polygon points="32.5,60 15,75 50,75" fill="#FFC0CB" /> <rect x="25" y="90" width="15" height="20" fill="#FFB6C1" /> <text x="80" y="95" font-size="32" fill="#D4508A" font-weight="bold">
+           +
+          </text> <circle cx="32" cy="28" r="2" fill="#FF6FA0" /> <circle cx="87" cy="28" r="2" fill="#FF6FA0" /> <circle cx="32" cy="68" r="2" fill="#FF6FA0" />
+         </svg>
+         <h3>Total Units</h3>
+         <p>120 Residential Units</p>
+        </div>
+        <div class="card" style="cursor: default;">
+         <svg width="120" height="120" viewbox="0 0 120 120" style="margin-bottom: 1.5rem;"><rect x="30" y="40" width="25" height="30" fill="#FFE8EC" stroke="#FFB6C1" stroke-width="2" rx="3" /> <polygon points="42.5,30 32,40 53,40" fill="#D4508A" /> <text x="42" y="60" font-size="14" fill="#D4508A" text-anchor="middle">
+           🕌
+          </text> <rect x="65" y="40" width="25" height="30" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="2" rx="3" /> <circle cx="70" cy="48" r="3" fill="#FF6FA0" /> <circle cx="85" cy="48" r="3" fill="#FF6FA0" /> <rect x="72" cy="55" width="11" height="15" fill="#FFB6C1" rx="1" /> <rect x="20" y="75" width="30" height="25" fill="#FFF5F8" stroke="#FFB6C1" stroke-width="2" rx="3" /> <circle cx="35" cy="87" r="8" fill="#FFB6C1" /> <path d="M 35 79 L 35 95 M 27 87 L 43 87" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" /> <rect x="60" y="75" width="30" height="25" fill="#FFE8EC" stroke="#FFB6C1" stroke-width="2" rx="3" /> <circle cx="68" cy="85" r="5" fill="#FF6FA0" /> <circle cx="82" cy="85" r="5" fill="#FF6FA0" /> <rect x="71" y="91" width="8" height="6" fill="#FFB6C1" rx="1" /> <circle cx="42" cy="35" r="2.5" fill="#FFC0CB" /> <circle cx="75" cy="35" r="2.5" fill="#FFC0CB" />
+         </svg>
+         <h3>Facilities</h3>
+         <p>Surau, Playground, Community Hall, Sports Areas</p>
+        </div>
+        <div class="card" style="cursor: default;">
+         <svg width="120" height="120" viewbox="0 0 120 120" style="margin-bottom: 1.5rem;"><circle cx="40" cy="40" r="12" fill="#FFE8EC" stroke="#FFB6C1" stroke-width="2" /> <circle cx="40" cy="50" r="8" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="1" /> <circle cx="80" cy="40" r="12" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="2" /> <circle cx="80" cy="50" r="8" fill="#FFE8EC" stroke="#FFB6C1" stroke-width="1" /> <circle cx="30" cy="75" r="10" fill="#FFF5F8" stroke="#FFB6C1" stroke-width="2" /> <circle cx="30" cy="84" r="7" fill="#FFE8EC" stroke="#FFB6C1" stroke-width="1" /> <circle cx="60" cy="75" r="10" fill="#FFE8EC" stroke="#FFB6C1" stroke-width="2" /> <circle cx="60" cy="84" r="7" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="1" /> <circle cx="90" cy="75" r="10" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="2" /> <circle cx="90" cy="84" r="7" fill="#FFF5F8" stroke="#FFB6C1" stroke-width="1" /> <path d="M 35 36 Q 40 32, 45 36" stroke="#D4508A" stroke-width="2" fill="none" stroke-linecap="round" /> <path d="M 75 36 Q 80 32, 85 36" stroke="#D4508A" stroke-width="2" fill="none" stroke-linecap="round" /> <circle cx="37" cy="38" r="1.5" fill="#D4508A" /> <circle cx="43" cy="38" r="1.5" fill="#D4508A" /> <circle cx="77" cy="38" r="1.5" fill="#D4508A" /> <circle cx="83" cy="38" r="1.5" fill="#D4508A" /> <circle cx="15" cy="25" r="3" fill="#FFC0CB" opacity="0.6" /> <circle cx="105" cy="30" r="3" fill="#FFC0CB" opacity="0.6" /> <circle cx="50" cy="15" r="2.5" fill="#FFB6C1" opacity="0.6" />
+         </svg>
+         <h3>Population</h3>
+         <p>Approximately 450 residents</p>
+        </div>
+        <div class="card" style="cursor: default;">
+         <svg width="120" height="120" viewbox="0 0 120 120" style="margin-bottom: 1.5rem;"><rect x="20" y="30" width="80" height="60" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="2" rx="5" /> <rect x="30" y="40" width="60" height="40" fill="#FFE8EC" stroke="#FF6FA0" stroke-width="2" rx="3" /> <circle cx="45" cy="55" r="8" fill="#FFF5F8" stroke="#D4508A" stroke-width="2" /> <circle cx="60" cy="55" r="8" fill="#FFF5F8" stroke="#D4508A" stroke-width="2" /> <circle cx="75" cy="55" r="8" fill="#FFF5F8" stroke="#D4508A" stroke-width="2" /> <circle cx="45" cy="70" r="8" fill="#FFF5F8" stroke="#D4508A" stroke-width="2" /> <circle cx="60" cy="70" r="8" fill="#FFF5F8" stroke="#D4508A" stroke-width="2" /> <circle cx="75" cy="70" r="8" fill="#FFF5F8" stroke="#D4508A" stroke-width="2" /> <rect x="45" y="95" width="30" height="15" fill="#FFB6C1" rx="7" /> <text x="60" y="106" font-size="10" fill="#FFFFFF" text-anchor="middle" font-weight="bold">
+           LEAD
+          </text> <path d="M 40 15 L 45 25 L 35 25 Z" fill="#FFD700" /> <circle cx="40" cy="14" r="3" fill="#FFC0CB" /> <path d="M 80 15 L 85 25 L 75 25 Z" fill="#FFD700" /> <circle cx="80" cy="14" r="3" fill="#FFC0CB" />
+         </svg>
+         <h3>Committee</h3>
+         <p>12 elected members serving 2-year terms</p>
+        </div>
+        <div class="card" style="cursor: default;">
+         <svg width="120" height="120" viewbox="0 0 120 120" style="margin-bottom: 1.5rem;"><circle cx="60" cy="60" r="45" fill="#FFF0F5" stroke="#FFB6C1" stroke-width="3" /> <circle cx="60" cy="60" r="40" fill="#FFE8EC" stroke="#FF6FA0" stroke-width="2" /> <line x1="60" y1="60" x2="60" y2="30" stroke="#D4508A" stroke-width="3" stroke-linecap="round" /> <line x1="60" y1="60" x2="75" y2="60" stroke="#FF6FA0" stroke-width="3" stroke-linecap="round" /> <circle cx="60" cy="60" r="5" fill="#D4508A" /> <text x="60" y="25" font-size="12" fill="#D4508A" text-anchor="middle" font-weight="bold">
+           12
+          </text> <text x="85" y="65" font-size="12" fill="#FF6FA0" text-anchor="middle" font-weight="bold">
+           3
+          </text> <text x="60" y="100" font-size="12" fill="#B87BA0" text-anchor="middle" font-weight="bold">
+           6
+          </text> <text x="35" y="65" font-size="12" fill="#B87BA0" text-anchor="middle" font-weight="bold">
+           9
+          </text> <path d="M 25 25 L 30 30 L 28 35" stroke="#FFC0CB" stroke-width="2" fill="none" /> <circle cx="26" cy="26" r="3" fill="#FFB6C1" /> <path d="M 95 25 L 90 30 L 92 35" stroke="#FFC0CB" stroke-width="2" fill="none" /> <circle cx="94" cy="26" r="3" fill="#FFB6C1" /> <text x="60" y="115" font-size="11" fill="#D4508A" text-anchor="middle" font-weight="bold">
+           2007
+          </text>
+         </svg>
+         <h3>Established</h3>
+         <p>2007 - Over 17 years of community service</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ACTIVITIES -->
+    <section id="activities" class="page">
+     <div class="content-section">
+      <h2>Community Activities</h2>
+      <div class="grid">
+       <div class="card" onclick="showEventDetails('annual')">
+        <h3>Annual Meeting</h3>
+        <p>Planning &amp; budget discussion for the year ahead</p>
+        <div class="card-date">
+         📅 24 January 2026
+        </div>
+       </div>
+       <div class="card" onclick="showEventDetails('ramadhan')">
+        <h3>Ramadhan Program</h3>
+        <p>Community Iftar, Terawih prayers &amp; Gotong-royong</p>
+        <div class="card-date">
+         📅 19 February 2026
+        </div>
+       </div>
+       <div class="card" onclick="showEventDetails('raya')">
+        <h3>Hari Raya Celebration</h3>
+        <p>Traditional festivities with neighbors</p>
+        <div class="card-date">
+         📅 29 March 2026
+        </div>
+       </div>
+       <div class="card" onclick="showEventDetails('sports')">
+        <h3>Sports Day</h3>
+        <p>Fun activities for all ages</p>
+        <div class="card-date">
+         📅 15 June 2026
+        </div>
+       </div>
+       <div class="card" onclick="showEventDetails('service')">
+        <h3>Community Service</h3>
+        <p>Neighborhood cleanup &amp; maintenance</p>
+        <div class="card-date">
+         📅 Every 2nd Saturday
+        </div>
+       </div>
+       <div class="card" onclick="showEventDetails('gathering')">
+        <h3>Social Gatherings</h3>
+        <p>Regular meetups and get-togethers</p>
+        <div class="card-date">
+         📅 Monthly
+        </div>
+       </div>
+      </div>
+     </div><!-- EVENT DETAILS MODAL -->
+     <div id="eventModal" class="modal" onclick="closeModal(event)">
+      <div class="modal-content" onclick="event.stopPropagation()"><button class="modal-close" onclick="closeModal(event)">✕</button>
+       <div id="modalBody"></div>
+      </div>
+     </div>
+    </section><!-- DONATIONS -->
+    <section id="donations" class="page">
+     <div class="content-section">
+      <h2>Community Contributions</h2>
+      <p class="section-text" style="margin-bottom: 2.5rem;">Track our community's collective contributions towards maintaining and improving our quarters. Every contribution helps make our neighborhood better!</p>
+      <div class="donations-header"><button class="year-tab active" onclick="switchYear(2025)" data-year="2025">2025</button> <button class="year-tab" onclick="switchYear(2026)" data-year="2026">2026 (Early)</button>
+      </div>
+      <div id="donations-content-2025" class="donations-content">
+       <div class="donation-stats">
+        <div class="stat-card">
+         <div class="stat-value">
+          RM 8,450
+         </div>
+         <div class="stat-label">
+          Total Raised
+         </div>
+        </div>
+        <div class="stat-card">
+         <div class="stat-value">
+          89
+         </div>
+         <div class="stat-label">
+          Contributors
+         </div>
+        </div>
+        <div class="stat-card">
+         <div class="stat-value">
+          RM 95
+         </div>
+         <div class="stat-label">
+          Average
+         </div>
+        </div>
+       </div>
+       <div class="chart-container">
+        <div class="chart-title">
+         Monthly Contributions - 2025
+        </div>
+        <div class="bar-chart">
+         <div class="bar-item">
+          <div class="bar" style="height: 75%;">
+           <div class="bar-value">
+            RM 820
+           </div>
+          </div>
+          <div class="bar-label">
+           Jan
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 60%;">
+           <div class="bar-value">
+            RM 650
+           </div>
+          </div>
+          <div class="bar-label">
+           Feb
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 95%;">
+           <div class="bar-value">
+            RM 980
+           </div>
+          </div>
+          <div class="bar-label">
+           Mar
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 85%;">
+           <div class="bar-value">
+            RM 890
+           </div>
+          </div>
+          <div class="bar-label">
+           Apr
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 70%;">
+           <div class="bar-value">
+            RM 720
+           </div>
+          </div>
+          <div class="bar-label">
+           May
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 100%;">
+           <div class="bar-value">
+            RM 1,050
+           </div>
+          </div>
+          <div class="bar-label">
+           Jun
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 65%;">
+           <div class="bar-value">
+            RM 620
+           </div>
+          </div>
+          <div class="bar-label">
+           Jul
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 80%;">
+           <div class="bar-value">
+            RM 750
+           </div>
+          </div>
+          <div class="bar-label">
+           Aug
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 90%;">
+           <div class="bar-value">
+            RM 870
+           </div>
+          </div>
+          <div class="bar-label">
+           Sep
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 88%;">
+           <div class="bar-value">
+            RM 840
+           </div>
+          </div>
+          <div class="bar-label">
+           Oct
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 92%;">
+           <div class="bar-value">
+            RM 920
+           </div>
+          </div>
+          <div class="bar-label">
+           Nov
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 97%;">
+           <div class="bar-value">
+            RM 990
+           </div>
+          </div>
+          <div class="bar-label">
+           Dec
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="chart-container">
+        <div class="chart-title">
+         Top Contributors - 2025
+        </div>
+        <div class="contributors-list">
+         <div class="contributor-item"><span class="contributor-name">Ahmad Bin Hassan</span> <span class="contributor-amount">RM 250</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Siti Nurhaliza</span> <span class="contributor-amount">RM 220</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Muhammad Faiz</span> <span class="contributor-amount">RM 200</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Nur Ain Binti Ali</span> <span class="contributor-amount">RM 180</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Azman Ibrahim</span> <span class="contributor-amount">RM 150</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Fatimah Zahra</span> <span class="contributor-amount">RM 150</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Ismail Yusof</span> <span class="contributor-amount">RM 120</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Zainab Omar</span> <span class="contributor-amount">RM 100</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div id="donations-content-2026" class="donations-content" style="display: none;">
+       <div class="donation-stats">
+        <div class="stat-card">
+         <div class="stat-value">
+          RM 1,420
+         </div>
+         <div class="stat-label">
+          Total Raised
+         </div>
+        </div>
+        <div class="stat-card">
+         <div class="stat-value">
+          42
+         </div>
+         <div class="stat-label">
+          Contributors
+         </div>
+        </div>
+        <div class="stat-card">
+         <div class="stat-value">
+          RM 34
+         </div>
+         <div class="stat-label">
+          Average
+         </div>
+        </div>
+       </div>
+       <div class="chart-container">
+        <div class="chart-title">
+         Monthly Contributions - 2026 (Jan-Feb)
+        </div>
+        <div class="bar-chart">
+         <div class="bar-item">
+          <div class="bar" style="height: 85%;">
+           <div class="bar-value">
+            RM 810
+           </div>
+          </div>
+          <div class="bar-label">
+           January
+          </div>
+         </div>
+         <div class="bar-item">
+          <div class="bar" style="height: 62%;">
+           <div class="bar-value">
+            RM 610
+           </div>
+          </div>
+          <div class="bar-label">
+           February
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="chart-container">
+        <div class="chart-title">
+         Top Contributors - 2026 (So Far)
+        </div>
+        <div class="contributors-list">
+         <div class="contributor-item"><span class="contributor-name">Haikal Aiman</span> <span class="contributor-amount">RM 100</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Noor Huda</span> <span class="contributor-amount">RM 90</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Razak Ahmad</span> <span class="contributor-amount">RM 80</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Sarah Aisyah</span> <span class="contributor-amount">RM 70</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Khairul Anuar</span> <span class="contributor-amount">RM 60</span>
+         </div>
+         <div class="contributor-item"><span class="contributor-name">Mariam Aziz</span> <span class="contributor-amount">RM 50</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ANNOUNCEMENTS -->
+    <section id="announcements" class="page">
+     <div class="content-section">
+      <h2>Announcements</h2>
+      <div class="announcements-container">
+       <div id="announcementList"></div>
+      </div>
+      <div class="admin-section">
+       <div class="admin-toggle"><button onclick="toggleAdminPanel()">Admin Panel</button>
+       </div>
+       <div id="adminPanel" class="admin-panel" style="display: none;">
+        <h3>Post Announcement</h3>
+        <div class="form-group"><label>Title</label> <input type="text" id="announceTitle" placeholder="Announcement title">
+        </div>
+        <div class="form-group"><label>Content</label> <textarea id="announceContent" placeholder="Announcement details"></textarea>
+        </div>
+        <div class="form-group"><label>Priority</label> <select id="announcePriority"> <option value="normal">Normal</option> <option value="high">High</option> </select>
+        </div><button class="btn-primary" onclick="postAnnouncement()" id="postBtn"> Post Announcement </button>
+       </div>
+      </div>
+     </div>
+    </section><!-- CONTACT -->
+    <section id="contact" class="page">
+     <div class="content-section">
+      <h2>Contact Us</h2>
+      <p class="section-text">Have questions or suggestions? Reach out to us through any of the channels below.</p>
+      <div class="contact-grid">
+       <div class="contact-card">
+        <div class="contact-icon">
+         📧
+        </div>
+        <h3>Email</h3>
+        <p id="contact-email">contact@mrsmgemencheh.edu.my</p>
+       </div>
+       <div class="contact-card">
+        <div class="contact-icon">
+         📱
+        </div>
+        <h3>Phone</h3>
+        <p id="contact-phone">0182561304 (Mr Haikal Aim)</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- FEEDBACK -->
+    <section id="feedback" class="page">
+     <div class="content-section">
+      <h2>Community Feedback</h2>
+      <p class="section-text" style="margin-bottom: 2rem;">Share your thoughts, suggestions, and reviews to help us improve! Your feedback is invaluable in making our community better.</p>
+      <div class="admin-section" style="max-width: 700px; border-top: none; padding-top: 0;">
+       <div class="admin-panel" style="display: block;">
+        <h3>Submit Feedback</h3>
+        <div class="form-group"><label for="feedbackName">Your Name</label> <input type="text" id="feedbackName" placeholder="Enter your name">
+        </div>
+        <div class="form-group"><label for="feedbackCategory">Category</label> <select id="feedbackCategory"> <option value="website">Website Improvement</option> <option value="events">Events &amp; Activities</option> <option value="facilities">Facilities &amp; Maintenance</option> <option value="communication">Communication</option> <option value="other">Other Suggestions</option> </select>
+        </div>
+        <div class="form-group"><label for="feedbackContent">Your Feedback</label> <textarea id="feedbackContent" placeholder="Share your thoughts, suggestions, or reviews..." style="min-height: 150px;"></textarea>
+        </div><button class="btn-primary" onclick="submitFeedback()" id="feedbackBtn"> Submit Feedback </button>
+       </div>
+       <div style="margin-top: 3rem;">
+        <h2 style="margin-bottom: 2rem; font-size: 1.75rem;">Recent Feedback</h2>
+        <div id="feedbackList"></div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </div><!-- FOOTER -->
+   <footer>
+    <p>© 2024 MRSM Gemencheh QRA. All rights reserved.</p>
+   </footer>
+  </div>
+  <script>
+// Default configuration
+const defaultConfig = {
+  site_title: 'MRSM Gemencheh QRA',
+  site_tagline: 'Official community platform for residents',
+  about_content: 'Established in 2007 to foster unity and provide a communication platform for MRSM Gemencheh quarters residents. Our association serves as a bridge between residents, promoting community welfare and organizing meaningful activities.',
+  contact_email: 'contact@mrsmgemencheh.edu.my',
+  contact_phone: '+60 12-345 6789',
+  primary_color: '#667eea',
+  navbar_color: '#ffffff',
+  background_color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  surface_color: '#ffffff',
+  text_color: '#1a202c'
+};
+
+// Current announcements
+let announcements = [];
+let feedbackItems = [];
+
+// Page Navigation
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.page');
+  const buttons = document.querySelectorAll('.menu button');
+  
+  pages.forEach(page => {
+    page.classList.remove('active');
+  });
+  
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  document.getElementById(pageId).classList.add('active');
+  document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+}
+
+// Switch donation year
+function switchYear(year) {
+  const tabs = document.querySelectorAll('.year-tab');
+  tabs.forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  document.querySelector(`[data-year="${year}"]`).classList.add('active');
+  
+  document.getElementById('donations-content-2025').style.display = year === 2025 ? 'block' : 'none';
+  document.getElementById('donations-content-2026').style.display = year === 2026 ? 'block' : 'none';
+}
+
+// Pre-populated Announcements
+const prePopulatedAnnouncements = [
+  {
+    title: 'Vehicle Sticker Requirement - January 2026',
+    content: 'Important Notice: All residents must display a vehicle sticker to park in the resident parking area starting January 2026. This initiative ensures security and proper parking management for our community. Please collect your vehicle sticker from the committee members or contact us for registration. Non-compliant vehicles may be subject to parking restrictions.',
+    priority: 'high',
+    date: new Date('2026-01-01T09:00:00').toISOString(),
+    isPrepopulated: true
+  },
+  {
+    title: 'Weekend Community Programs',
+    content: 'Join us every weekend for meaningful community programs at the quarters! Our structured initiatives include gotong-royong (community cleanups), health education sessions, skill-building workshops, social support activities, and resource sharing. These programs are designed to improve the well-being, skills, and environment of our residents. Run by volunteers and supported by our committee, we aim to foster empathy, civic duty, and collective strength. Everyone is welcome to participate and contribute to making our community better. Together we grow stronger!',
+    priority: 'normal',
+    date: new Date('2026-01-21T10:00:00').toISOString(),
+    isPrepopulated: true
+  }
+];
+
+// Initial render
+renderAnnouncements([]);
+
+// Event Details Data
+const eventDetails = {
+  annual: {
+    title: 'Annual Meeting 2026',
+    date: '24 January 2026',
+    time: '10:00 AM - 12:00 PM',
+    location: 'Bilik Mesyuarat Kuarters MRSM Gemencheh',
+    description: 'Join us for our Annual General Meeting where we will discuss the year\'s achievements, upcoming plans, and budget allocation for 2026. This is an important gathering for all residents to voice their opinions and participate in community decisions.',
+    activities: [
+      'Opening remarks by Chairman',
+      'Review of 2025 activities and financial report',
+      'Budget proposal for 2026',
+      'Election of committee members',
+      'Discussion of upcoming community projects',
+      'Q&A session with residents',
+      'Light refreshments will be served'
+    ]
+  },
+  ramadhan: {
+    title: 'Ramadhan Program 2026',
+    date: '19 February 2026',
+    time: '5:30 PM onwards',
+    location: 'Quarters Compound',
+    description: 'A blessed month of togetherness! Join your neighbors for our annual Ramadhan program featuring community iftar, Terawih prayers, and gotong-royong to strengthen our bonds during this holy month.',
+    activities: [
+      'Gotong-royong (Community cleanup) - 3:00 PM',
+      'Iftar preparation by volunteers - 4:30 PM',
+      'Breaking fast together - 7:00 PM',
+      'Maghrib prayers in congregation',
+      'Light dinner and fellowship',
+      'Terawih prayers - 8:30 PM',
+      'Traditional kuih and beverages provided'
+    ]
+  },
+  raya: {
+    title: 'Hari Raya Celebration 2026',
+    date: '29 March 2026',
+    time: '9:00 AM - 1:00 PM',
+    location: 'Community Hall',
+    description: 'Celebrate Hari Raya Aidilfitri with your neighbors! A joyous occasion filled with traditional festivities, delicious food, and activities for the whole family. Open house style celebration with games and prizes for children.',
+    activities: [
+      'Traditional Malay breakfast buffet',
+      'Duit raya for children',
+      'Photography session with traditional decorations',
+      'Cultural performances and music',
+      'Games and activities for kids',
+      'Lucky draw with exciting prizes',
+      'Fellowship and community bonding'
+    ]
+  },
+  sports: {
+    title: 'Sports Day 2026',
+    date: '15 June 2026',
+    time: '7:00 AM - 1:00 PM',
+    location: 'MRSM Gemencheh Sports Complex',
+    description: 'Get active and have fun with your neighbors! Our annual Sports Day features competitive and friendly games for all ages. Bring your family for a day of healthy competition, exercise, and community spirit.',
+    activities: [
+      'Futsal tournament for adults',
+      'Badminton competition',
+      'Tug-of-war challenge',
+      'Running races for children (various age groups)',
+      'Sack race and egg-and-spoon race',
+      'Volleyball friendly matches',
+      'Prizes and medals for winners',
+      'Light refreshments and hydration stations'
+    ]
+  },
+  service: {
+    title: 'Community Service Day',
+    date: 'Every 2nd Saturday',
+    time: '7:00 AM - 10:00 AM',
+    location: 'Various locations in Quarters',
+    description: 'Give back to our community! Join your neighbors for regular neighborhood cleanup and maintenance activities. Together we keep our quarters beautiful, clean, and well-maintained for everyone to enjoy.',
+    activities: [
+      'Street and drain cleaning',
+      'Landscaping and gardening work',
+      'Painting of public areas when needed',
+      'Playground equipment inspection and cleaning',
+      'Reporting of maintenance issues to authorities',
+      'Community notice board updates',
+      'Light breakfast provided after activities'
+    ]
+  },
+  gathering: {
+    title: 'Monthly Social Gatherings',
+    date: 'Last Friday of Every Month',
+    time: '8:00 PM - 10:00 PM',
+    location: 'Community Hall or Rotating Houses',
+    description: 'Strengthen our community bonds through regular social meetups! These casual gatherings are perfect for neighbors to connect, share stories, and build lasting friendships. Everyone is welcome to join!',
+    activities: [
+      'Potluck dinner (residents bring dishes to share)',
+      'Ice-breaker games and activities',
+      'Community updates and announcements',
+      'Sharing of tips and resources',
+      'Traditional games (carrom, congkak, etc.)',
+      'Movie nights or karaoke sessions',
+      'Planning for upcoming events'
+    ]
+  }
+};
+
+// Show Event Details in Modal
+function showEventDetails(eventId) {
+  const event = eventDetails[eventId];
+  const modal = document.getElementById('eventModal');
+  const modalBody = document.getElementById('modalBody');
+  
+  modalBody.innerHTML = `
+    <div class="event-detail">
+      <h3>${event.title}</h3>
+      
+      <div class="event-info">
+        <div class="event-info-item">
+          <div class="event-icon">📅</div>
+          <div class="event-info-content">
+            <h4>Date</h4>
+            <p>${event.date}</p>
+          </div>
+        </div>
+        
+        <div class="event-info-item">
+          <div class="event-icon">🕐</div>
+          <div class="event-info-content">
+            <h4>Time</h4>
+            <p>${event.time}</p>
+          </div>
+        </div>
+        
+        <div class="event-info-item">
+          <div class="event-icon">📍</div>
+          <div class="event-info-content">
+            <h4>Location</h4>
+            <p>${event.location}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="event-description">
+        <p>${event.description}</p>
+      </div>
+      
+      <div class="event-activities">
+        <h4>Activities & Schedule:</h4>
+        <ul>
+          ${event.activities.map(activity => `<li>${activity}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  `;
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+// Close Modal
+function closeModal(event) {
+  const modal = document.getElementById('eventModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Admin Panel Toggle
+function toggleAdminPanel() {
+  const panel = document.getElementById('adminPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+}
+
+// Post Announcement
+async function postAnnouncement() {
+  const title = document.getElementById('announceTitle').value.trim();
+  const content = document.getElementById('announceContent').value.trim();
+  const priority = document.getElementById('announcePriority').value;
+  
+  if (!title || !content) {
+    showToast('Please fill in all fields');
+    return;
+  }
+
+  if (announcements.length >= 999) {
+    showToast('Maximum limit of 999 announcements reached');
+    return;
+  }
+  
+  const postBtn = document.getElementById('postBtn');
+  postBtn.disabled = true;
+  postBtn.innerHTML = '<span class="loading-spinner"></span>Posting...';
+  
+  const announcement = {
+    title: title,
+    content: content,
+    priority: priority,
+    date: new Date().toISOString()
+  };
+  
+  const result = await window.dataSdk.create(announcement);
+  
+  if (result.isOk) {
+    document.getElementById('announceTitle').value = '';
+    document.getElementById('announceContent').value = '';
+    document.getElementById('announcePriority').value = 'normal';
+    showToast('Announcement posted successfully!');
+  } else {
+    showToast('Failed to post announcement. Please try again.');
+  }
+  
+  postBtn.disabled = false;
+  postBtn.innerHTML = 'Post Announcement';
+}
+
+// Render Announcements
+function renderAnnouncements(data) {
+  announcements = data;
+  const container = document.getElementById('announcementList');
+  
+  const allAnnouncements = [...prePopulatedAnnouncements, ...data];
+  
+  if (allAnnouncements.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">📢</div>
+        <p>No announcements yet. Check back later for updates!</p>
+      </div>
+    `;
+    return;
+  }
+  
+  const sortedData = [...allAnnouncements].sort((a, b) => {
+    if (a.priority === 'high' && b.priority !== 'high') return -1;
+    if (a.priority !== 'high' && b.priority === 'high') return 1;
+    return new Date(b.date) - new Date(a.date);
+  });
+  
+  container.innerHTML = sortedData.map(announcement => {
+    const date = new Date(announcement.date);
+    const formattedDate = date.toLocaleDateString('en-MY', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    return `
+      <div class="announcement-item">
+        <div class="announcement-header">
+          <div>
+            <span class="announcement-title">${announcement.title}</span>
+            ${announcement.priority === 'high' ? '<span class="priority-badge priority-high">High Priority</span>' : ''}
+          </div>
+          <span class="announcement-date">${formattedDate}</span>
+        </div>
+        <div class="announcement-content">${announcement.content}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Toast Notification
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'slideInRight 0.3s ease reverse';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// Submit Feedback
+async function submitFeedback() {
+  const name = document.getElementById('feedbackName').value.trim();
+  const category = document.getElementById('feedbackCategory').value;
+  const content = document.getElementById('feedbackContent').value.trim();
+  
+  if (!name || !content) {
+    showToast('Please fill in your name and feedback');
+    return;
+  }
+
+  if (feedbackItems.length >= 999) {
+    showToast('Maximum limit of 999 feedback entries reached');
+    return;
+  }
+  
+  const feedbackBtn = document.getElementById('feedbackBtn');
+  feedbackBtn.disabled = true;
+  feedbackBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
+  
+  const feedback = {
+    name: name,
+    category: category,
+    content: content,
+    date: new Date().toISOString()
+  };
+  
+  const result = await window.feedbackSdk.create(feedback);
+  
+  if (result.isOk) {
+    document.getElementById('feedbackName').value = '';
+    document.getElementById('feedbackContent').value = '';
+    document.getElementById('feedbackCategory').value = 'website';
+    showToast('Thank you for your feedback!');
+  } else {
+    showToast('Failed to submit feedback. Please try again.');
+  }
+  
+  feedbackBtn.disabled = false;
+  feedbackBtn.innerHTML = 'Submit Feedback';
+}
+
+// Render Feedback
+function renderFeedback(data) {
+  feedbackItems = data;
+  const container = document.getElementById('feedbackList');
+  
+  if (data.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">💬</div>
+        <p>No feedback yet. Be the first to share your thoughts!</p>
+      </div>
+    `;
+    return;
+  }
+  
+  const sortedData = [...data].sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  const categoryLabels = {
+    website: 'Website',
+    events: 'Events',
+    facilities: 'Facilities',
+    communication: 'Communication',
+    other: 'Other'
+  };
+  
+  container.innerHTML = sortedData.map(feedback => {
+    const date = new Date(feedback.date);
+    const formattedDate = date.toLocaleDateString('en-MY', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    return `
+      <div class="announcement-item">
+        <div class="announcement-header">
+          <div>
+            <span class="announcement-title">${feedback.name}</span>
+            <span class="priority-badge priority-normal">${categoryLabels[feedback.category]}</span>
+          </div>
+          <span class="announcement-date">${formattedDate}</span>
+        </div>
+        <div class="announcement-content">${feedback.content}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Data SDK Handler
+const dataHandler = {
+  onDataChanged(data) {
+    renderAnnouncements(data);
+  }
+};
+
+// Feedback SDK Handler
+const feedbackHandler = {
+  onDataChanged(data) {
+    renderFeedback(data);
+  }
+};
+
+// Element SDK Config Handler
+async function onConfigChange(config) {
+  const primaryColor = config.primary_color || defaultConfig.primary_color;
+  const navbarColor = config.navbar_color || defaultConfig.navbar_color;
+  const backgroundColor = config.background_color || defaultConfig.background_color;
+  const surfaceColor = config.surface_color || defaultConfig.surface_color;
+  const textColor = config.text_color || defaultConfig.text_color;
+  
+  document.body.style.background = backgroundColor;
+  
+  const navbar = document.querySelector('.navbar');
+  if (navbar) {
+    navbar.style.background = navbarColor;
+  }
+  
+  const logos = document.querySelectorAll('.logo');
+  logos.forEach(logo => logo.style.color = surfaceColor);
+  
+  const h2Elements = document.querySelectorAll('h2');
+  h2Elements.forEach(h2 => h2.style.color = primaryColor);
+  
+  const cardH3Elements = document.querySelectorAll('.card h3, .contact-card h3, .announcement-title, .admin-panel h3');
+  cardH3Elements.forEach(h3 => h3.style.color = primaryColor);
+  
+  const heroTitle = document.querySelector('.hero h1');
+  if (heroTitle) {
+    heroTitle.style.color = primaryColor;
+  }
+  
+  const activeButtons = document.querySelectorAll('.menu button.active');
+  activeButtons.forEach(btn => {
+    btn.style.background = primaryColor;
+    btn.style.color = surfaceColor;
+  });
+  
+  const primaryButtons = document.querySelectorAll('.btn-primary, .admin-toggle button');
+  primaryButtons.forEach(btn => {
+    btn.style.background = navbarColor;
+    btn.style.color = surfaceColor;
+  });
+  
+  document.getElementById('nav-logo').textContent = config.site_title || defaultConfig.site_title;
+  document.getElementById('hero-title').textContent = config.site_title || defaultConfig.site_title;
+  document.getElementById('hero-tagline').textContent = config.site_tagline || defaultConfig.site_tagline;
+  document.getElementById('about-text').textContent = config.about_content || defaultConfig.about_content;
+  document.getElementById('contact-email').textContent = config.contact_email || defaultConfig.contact_email;
+  document.getElementById('contact-phone').textContent = config.contact_phone || defaultConfig.contact_phone;
+}
+
+// Initialize SDKs
+async function init() {
+  const dataResult = await window.dataSdk.init(dataHandler);
+  if (!dataResult.isOk) {
+    console.error('Failed to initialize Data SDK');
+  }
+  
+  window.feedbackSdk = window.dataSdk;
+  const feedbackResult = await window.feedbackSdk.init(feedbackHandler);
+  if (!feedbackResult.isOk) {
+    console.error('Failed to initialize Feedback SDK');
+  }
+  
+  if (window.elementSdk) {
+    window.elementSdk.init({
+      defaultConfig: defaultConfig,
+      onConfigChange: onConfigChange,
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.navbar_color || defaultConfig.navbar_color,
+            set: (value) => {
+              config.navbar_color = value;
+              window.elementSdk.setConfig({ navbar_color: value });
+            }
+          },
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['site_title', config.site_title || defaultConfig.site_title],
+        ['site_tagline', config.site_tagline || defaultConfig.site_tagline],
+        ['about_content', config.about_content || defaultConfig.about_content],
+        ['contact_email', config.contact_email || defaultConfig.contact_email],
+        ['contact_phone', config.contact_phone || defaultConfig.contact_phone]
+      ])
+    });
+  }
+}
+
+init();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9be2fd0654398b74',t:'MTc2ODQ1NTEwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
